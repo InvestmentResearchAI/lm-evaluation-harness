@@ -112,7 +112,7 @@ class LitGPT(LM):
             
             # Check if per-token argmax is exactly equal to continuation
             greedy_tokens = logits.argmax(dim=-1)
-            cont_toks = continuation_enc.unsqueeze(0)  # [1, seq]
+            cont_toks = continuation_enc.unsqueeze(0).to(self.device) # [1, seq]
             max_equal = (greedy_tokens == cont_toks).all()
             
             logits = torch.gather(logits, 2, cont_toks.unsqueeze(-1)).squeeze(-1)  # [1, seq]
