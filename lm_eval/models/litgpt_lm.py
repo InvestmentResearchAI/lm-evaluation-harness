@@ -90,7 +90,13 @@ class LitGPT(LM):
                 context_enc, continuation_enc = self._encode_pair(context, continuation)
             new_reqs.append(((context, continuation), context_enc, continuation_enc))
         return self._loglikelihood_tokens(new_reqs)
-        
+
+    def generate_until(self):
+        ...
+
+    def loglikelihood_rolling(self):
+        ...
+    
     def _loglikelihood_tokens(
         self,
         requests: List[Tuple[Tuple[str, str], List[int], List[int]]]
